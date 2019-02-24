@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-# sudo pigpiod
+#sudo pigpiod 시작하기전 활성화가 필요합니다.
+
 from flask import Flask
 import pigpio
 import DHT22
@@ -14,7 +15,8 @@ pi = pigpio.pi()
 dht22 = DHT22.sensor(pi, 23) # use the actual GPIO pin name
 dht22.trigger()
 
-htmlCode = '''
+#동적 html페이지의 소스코드입니다, format을 사용하여 데이터를 넣어주었습니다.
+htmlCode = ''' 
 <!DOCTYPE HTML>
 
 <html>
@@ -46,9 +48,9 @@ def readDHT22():
     # Get a new reading
     dht22.trigger()
     # Save our values
-    humidity = '%.2f' % (dht22.humidity())
-    temp = '%.2f' % (dht22.temperature())
-    fahr = '%.2f' % (dht22.temperature() * 1.8 + 32)
+    humidity = '%.2f' % (dht22.humidity()) #humidity
+    temp = '%.2f' % (dht22.temperature()) #Celsius
+    fahr = '%.2f' % (dht22.temperature() * 1.8 + 32) #Fahrenheit
     return (humidity, temp, fahr)
 
 @app.route('/')
