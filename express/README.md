@@ -17,6 +17,6 @@
 * 그래프 상에서 marker에 커서를 위치시키면 해당 데이터를 볼 수 있습니다.
 
 ### 참고 이미지
-![route](/express/route.png)
+![route](/express/root.png)
 ![express](/express/express.png)
 ![plotly](/express/plotly.png)
