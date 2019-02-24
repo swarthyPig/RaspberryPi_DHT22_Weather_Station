@@ -1,0 +1,92 @@
+﻿* OS 업데이트 업그레이드
+   - sudo apt-get update
+   - sudo apt-get upgrade
+
+* NODE.JS(최신버전 설치)
+   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+   - sudo apt-get install -y nodejs
+   - node -v or node --version
+   - npm -v
+   - 실행 -> node index.js
+   - express 설치 -> npm install express
+
+* DHT22
+   - cd ~
+     git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+     cd Adafruit_Python_DHT
+     sudo apt-get update
+     sudo apt-get install build-essential python3-dev
+     sudo python3 setup.py install
+     sudo reboot
+
+   - wget abyz.me.uk/rpi/pigpio/code/DHT22_py.zip -> dht.22 라이브러리 다운
+
+* gpio
+  - wget abyz.me.uk/rpi/pigpio/pigpio.zip
+    sudo unzip pigpio.zip
+    cd PIGPIO
+    sudo make
+    sudo make install
+  - sudo pigpiod
+
+* 파이썬 Rpi.GPIO 패키지
+  - sudo apt-get install python3-dev  -> 파이썬 설치되어있으면 필요없음
+  - sudo apt-get install python3-rpi.gpio
+
+* Flask
+  - sudo pip install flask
+
+
+* 아파치
+   - sudo apt-get install apache2
+   - sudo chown pi -R /home/pi/xxx -> 소유권한 설정
+   - sudo update-rc.d apache2 defaults  -> 부팅시 자동 시작
+   - sudo /etc/init.d/apache2 restart  OR sudo service apache2 restart -> 서버재시작
+   - 경로설정
+      - 홈 경로에 xxx디렉토리 만듬
+      - chmod 755 ~/xxx
+      - xxx 디렉토리 안에다가 html 디렉토리 만들어줌
+      - sudo nano /etc/apache2/apache2.conf
+      - <Directory /home/pi/xxx> 로 변경
+      - 수정 끝나고 ctrl+x -> y -> 엔터
+      - sudo nano /etc/apache2/sites-enabled/000-default.conf
+      - DocumentRoot /home/pi/xxx/html로 변경
+
+
+* CGI & python 연동
+  - nano /etc/apache2/sites-enabled/000-default.conf
+  - Document root(웹서버가 요청한 파일을 찾는 최상위 디렉토리)에 있는 파일 중 확장자가 .py인 파일은 python으로서 실행되도록 한다
+    <Directory /home/cabox/workspace>
+                AddHandler cgi-script .py
+                Options ExecCGI
+    </Directory>
+   - sudo a2enmod cgi -> cgi 기능 켜기
+   - sudo chmod a+x xx.py  -> 파일 권한 주기
+   - sudo service apache2 restart
+   - sudo tail -f /var/log/apache2/error.log -> 오류메세지(log) 확인
+
+  
+* 초기설정
+   @ 비밀번호 변경
+      - sudo raspi-config  -> change user password
+
+   @ 표준 시간대 변경
+      - sudo raspi-config  -> Localisation Options -> time zone -> Asia -> seoul
+
+   @ sd카드 전체공간사용
+      - sudo raspi-config  -> advanced Options -> Expand Filesystem
+
+   @ 부트옵션
+      - sudo raspi-config -> Boot Options -> B1 Desktop /CLI -> Desktop Autologin
+
+* 키보드 특수문자
+   - $ sudo vi /etc/default/keyboard
+   - 파일 내용 중에 XKBLAYOUT =”gb” 가있는데 여기서 gb를 -> us 로 바꾼후 저장한다.
+   - $ sudo reboot
+
+* 한글 설정
+   - sudo apt-get install ibus  
+   - sudo apt-get install ibus-hangul
+   - sudo apt-get install fonts-unfonts-core
+
+
