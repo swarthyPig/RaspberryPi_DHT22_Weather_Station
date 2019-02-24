@@ -19,3 +19,8 @@
   * express folder
     1. 클라이언트 페이지에서 socket.io로 보낸 데이터를 받아 실시간으로 데이터를 볼 수 있게 하였습니다.
     2. CORS(Cross-Origin Resource Sharing)설정을 하여 도메인이 달라 socket.io에서 데이터가 넘어오지 못하는 부분을 해결하였습니다.
+
+### 참고 이미지 
+  ![DHT22 Pin](/dht22.png)
+  
+  ![GPIO Pin Map](/GPIO.png)
