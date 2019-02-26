@@ -20,13 +20,18 @@
     1. 라즈베리파이 GPIO핀과 파이썬을 이용하여 DHT22센서 데이터를 받았습니다.
     2. 파이썬의 Flask를 사용하여 동적 html웹 페이지(2초마다 데이터 갱신)를 생성하였습니다.
     
-  * socket folder
+  * socket folder(해당 폴더 안의 index.js는 mongoDB를 적용하기 전이므로 사용하지않고 mongoDB 폴더안의 index.js를 사용합니다.)
     1. 동적으로 생성한 html페이지에서 cheerio 모듈을 사용하여 데이터(섭씨,화씨,습도) 부분만 Web Scraping 하였습니다.
     2. Scraping한 데이터를 socket.io를 사용하여 express 서버로 돌고있는 클라이언트 페이지로 뿌려줍니다.
     
   * express folder
     1. 클라이언트 페이지에서 socket.io로 보낸 데이터를 받아 실시간으로 데이터를 볼 수 있게 하였습니다.
     2. CORS(Cross-Origin Resource Sharing)설정을 하여 도메인이 달라 socket.io에서 데이터가 넘어오지 못하는 부분을 해결하였습니다.
+    
+  * mongoDB folder
+    1. NoSQL인 mongoDB를 사용하여 데이터를 저장 관리 하였습니다.
+    2. 라즈베리파이에서 apt-get으로 받은 mongoDB는 하위 버전(2.4.6) 문제상 작동이 되지않아 Jessie version(3.0.9)으로 설치 하였습니다.
+    3. mongoDB에 저장한 데이터를 export하여 생성된 csv파일을 사용하여 파이썬 라이브러리를 통해서 데이터를 분석하고 mining하였습니다.
     
   * Raspberry Pi setting & install.txt
     - 라즈베리파이에 대한 초기설정과 각종 언어 및 기술의 설치 방법등이 적혀있습니다.
