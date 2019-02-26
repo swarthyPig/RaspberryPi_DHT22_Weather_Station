@@ -30,7 +30,7 @@
     
   * mongoDB folder
     1. NoSQL인 mongoDB를 사용하여 데이터를 저장 관리 하였습니다.
-    2. 라즈베리파이에서 apt-get으로 받은 mongoDB는 하위 버전(2.4.6) 문제상 작동이 되지않아 Jessie version(3.0.9)으로 설치 하였습니다.
+    2. 라즈베리파이에서 apt-get으로 받은 mongoDB는 하위 버전(2.4.6)(요구버전(2.6이상)) 문제상 작동이 되지않아 2.6이상 버전은 설치가 불가능하여 Jessie version(3.0.9)으로 설치 하였습니다.
     3. mongoDB에 저장한 데이터를 export하여 생성된 csv파일을 사용하여 파이썬 라이브러리를 통해서 데이터를 분석하고 mining하였습니다.
     
   * Raspberry Pi setting & install.txt
