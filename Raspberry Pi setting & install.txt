@@ -36,6 +36,111 @@
 * Flask
   - sudo pip install flask
 
+* mongodb(Jessie version) -> https://andyfelong.com/2016/01/mongodb-3-0-9-binaries-for-raspberry-pi-2-jessie/
+  
+  - mongodb : https://andyfelong.com/downloads/core_mongodb.tar.gz
+  - mongodb Tools : https://andyfelong.com/downloads/tools_mongodb.tar.gz
+
+  - check for mongodb user
+    @ grep mongodb /etc/passwd
+   - if NO mongodb user, create:
+    @ sudo adduser --ingroup nogroup --shell /etc/false --disabled-password --gecos "" \--no-create-home mongodb
+
+   - cd to the directory with mongo, mongod, mongos, etc
+     ensure appropriate owner & executable permissions
+     strip out symbols to reduce file size
+     move to /usr/bin which is in PATH
+
+     @ cd dir-with-binaries
+         sudo chown root:root mongo*
+         sudo chmod 755 mongo*
+         sudo strip mongo*
+         sudo cp -p mongo* /usr/bin
+
+   - create log file directory with appropriate owner & permissions
+     @ sudo mkdir /var/log/mongodb
+         sudo chown mongodb:nogroup /var/log/mongodb
+
+   - create the DB data directory with convenient access perms
+     @ sudo mkdir /var/lib/mongodb
+         sudo chown mongodb:root /var/lib/mongodb
+         sudo chmod 775 /var/lib/mongodb
+
+   - create the mongodb.conf file in /etc
+     @ cd /etc
+        sudo vi mongodb.conf
+
+   - insert into file:
+     // /etc/mongodb.conf
+     // minimal config file (old style)
+     // sudo Run mongod --help to see a list of options
+
+     bind_ip = 127.0.0.1
+     quiet = true
+     dbpath = /var/lib/mongodb
+     logpath = /var/log/mongodb/mongod.log
+     logappend = true
+     verbose=true
+     storageEngine = mmapv1
+
+   - create systemd / service entry
+     @ cd /lib/systemd/system
+         sudo vi mongodb.service
+
+      – insert into file:
+
+        [Unit]
+         Description=High-performance, schema-free document-oriented database
+         After=network.target
+
+        [Service]
+         User=mongodb
+         ExecStart=/usr/bin/mongod --quiet --config /etc/mongodb.conf
+
+        [Install]
+         WantedBy=multi-user.target
+
+    - you are now ready to launch mongodb!
+      @ sudo service mongodb start
+    
+    - if error
+      This is a libssl1.0.0 error, so you need to reinstall this library to do it
+      OR
+      This is a libssl.so.1.0.0 error, so you need to reinstall this library to do it:
+
+      @ sudo wget http://ftp.kr.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_armhf.deb
+          sudo dpkg -i libssl1.0.0_1.0.2l-1~bpo8+1_armhf.deb
+
+    - then run this command:
+      @ /usr/bin/mongod –version
+         You should see both a DB version (3.0.9) and Git version.  If so, you are ready to go...
+         -> 이렇게 나오면 설치 성공
+
+    - check status 
+      @ sudo service mongodb status
+
+    - MAKE SURE YOU SHUTDOWN CLEANLY!
+      @ sudo service mongodb stop
+
+    - use tools
+      @ tar zxvf tools_mongodb.tar.gz
+          sudo strip mongo*
+          sudo chown root:root mongo*
+          sudo chmod 755 mongo*
+          sudo mv mongo* /usr/bin
+
+    - 실행 순서
+       @ sudo service mongodb start  -> 데몬 시작
+           sudo service mongodb status -> 시작 확인
+           sudo /usr/bin/mongo localhost: 27017 -> 몽고 shell
+
+       - 데이터 보기
+         @ show dbs
+             use iot
+             show collections
+             db.sensors.find().pretty()
+             db.sensors.find().sort({_id: -1}).limit(10)  -> 최근 데이터 10개 추출
+             db.sensors.count() -> 문서의 갯수
 
 * 아파치
    - sudo apt-get install apache2
