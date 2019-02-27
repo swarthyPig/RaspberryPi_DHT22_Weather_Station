@@ -1,4 +1,4 @@
-# Raspberry Pi_DHT22_Wireless
+# Raspberry Pi_DHT22_Weather_Station
 
 ### weMos를 사용하여 진행 하였던 기존 프로젝트를 라즈베리파이를 사용해서 구축하였습니다.
   * 이번 프로젝트는 하나의 라즈베리파이안에서 모든것을 할 수 있는 통합개발환경을 구축하는 것을 목표로 하였습니다.
