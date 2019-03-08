@@ -18,14 +18,14 @@ db.once('open', function callback () {
 var iotSchema = new Schema({
     date : String,
     temperature : String,
-    Fahrenheit : String,
+    fahrenheit : String,
     humidity : String
 });
 // Display data on console in the case of saving data.
 iotSchema.methods.info = function () {
     var iotInfo = this.date
     ? "date: " + this.date +", Temp: " + this.temperature 
-    + ", Fahr: " + this.Fahrenheit + ", Humi: " + this.humidity 
+    + ", Fahr: " + this.fahrenheit + ", Humi: " + this.humidity 
     : "I don't have a date"
     console.log("iotInfo: " + iotInfo);
 }
@@ -114,7 +114,7 @@ setInterval(function () {
     dht22data[2] = FahrenheitData; // Fahrenheit data
     dht22data[3] = HumidityData; // humidity data
     
-    var iot = new Sensor({date:dateStr, temperature:CelsiusData, Fahrenheit:FahrenheitData, humidity:HumidityData});
+    var iot = new Sensor({date:dateStr, temperature:CelsiusData, fahrenheit:FahrenheitData, humidity:HumidityData});
         // save iot data (document) to MongoDB
         iot.save(function(err, iot) {
             if(err) return handleEvent(err);
