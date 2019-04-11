@@ -82,6 +82,7 @@
      logappend = true
      verbose=true
      storageEngine = mmapv1
+     journal = true
 
    - create systemd / service entry
      @ cd /lib/systemd/system
@@ -129,6 +130,9 @@
           sudo chmod 755 mongo*
           sudo mv mongo* /usr/bin
 
+    - mongodb auto start when you booting
+      @ systemctl enable mongodb.service
+
     - 실행 순서
        @ sudo service mongodb start  -> 데몬 시작
            sudo service mongodb status -> 시작 확인
@@ -141,6 +145,7 @@
              db.sensors.find().pretty()
              db.sensors.find().sort({_id: -1}).limit(10)  -> 최근 데이터 10개 추출
              db.sensors.count() -> 문서의 갯수
+             db.sensors.remove({ }) -> 데이터 삭제
 
 * 아파치
    - sudo apt-get install apache2
