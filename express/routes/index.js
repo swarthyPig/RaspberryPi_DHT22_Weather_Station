@@ -1,9 +1,4 @@
-var express = require('express');
 var router = express.Router();
-var cors = require('cors')();
-var app = express();
-
-app.use(cors); //Cross-Origin Resource Sharing 
 
 // MongoDB
 var mongoose = require('mongoose');
