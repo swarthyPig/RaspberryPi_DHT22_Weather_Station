@@ -8,6 +8,20 @@
   * flask(5000), socket.io(3000), express(3030) 총 3개의 서버를 사용하였고 동시에 running됩니다.
   * 데이터를 주고받기위해 CORS 설정을 해주어 문제없이 작동 되게 하였습니다.
   
+### 사용한 도구, 언어 및 기술
+  * Editor
+    - Brackets
+  * 도구
+    - Raspberry Pi 3 B+, DHT22
+  * Front-End
+    - HTML5, javascript, plotly.js, gauge.js
+  * Back-End
+    - Python3(Flask), node.js, express, socket.io
+  * Module and Library
+    -  Python3(DHT22 library), mongoose, cheerio, cors
+  * DB
+    - MongoDB
+  
 ### 모듈의 버전
   * 버전문제로 인해 각종 모듈의 버전을 아래와 같이 고정하였습니다. 
   * "cheerio": "^1.0.0-rc.2",
